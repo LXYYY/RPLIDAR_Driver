@@ -1,7 +1,8 @@
 #include "librplidar_global.h"
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <iostream>
+using namespace std;
 #include "rplidar.h" //RPLIDAR standard sdk, all-in-one header
 using namespace rp::standalone::rplidar;
 
@@ -103,13 +104,14 @@ bool dispose()
     return (0);
 }
 
-int lidarGetScanData(rplidar_measurement_node_t* nodes, size_t count, _u32 timeout)
+int lidarGetScanData(rplidar_response_measurement_node_t* nodes, size_t* count, _u32 timeout)
 {
     _u32 op_result;
+//    cout<<count<<endl;
 
-    op_result = drv->grabScanData((rplidar_response_measurement_node_t*)nodes, count,timeout);
+    op_result = drv->grabScanData(nodes, *count,timeout);
     if (IS_OK(op_result)){
-        drv->ascendScanData((rplidar_response_measurement_node_t*)nodes, count);
+        drv->ascendScanData(nodes, *count);
         return 0;
     }
     else return -1;

@@ -12,6 +12,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdint.h>
+#include <rplidar.h>
 
 typedef struct _rplidar_measurement_node_t {
     uint8_t    sync_quality;      // syncbit:1;syncbit_inverse:1;quality:6;
@@ -21,7 +22,7 @@ typedef struct _rplidar_measurement_node_t {
 
 LIBRPLIDARSHARED_EXPORT int lidarInit(const char* portname="//./com3",unsigned int baudrate=115200);
 LIBRPLIDARSHARED_EXPORT int lidarStart(void);
-LIBRPLIDARSHARED_EXPORT int lidarGetScanData(rplidar_measurement_node_t * nodes,size_t count, unsigned int timeout = 2000);
+LIBRPLIDARSHARED_EXPORT int lidarGetScanData(rplidar_response_measurement_node_t * nodes,size_t* count, unsigned int timeout = 2000);
 LIBRPLIDARSHARED_EXPORT int lidarStop(void);
 
 #endif // LIBRPLIDAR_GLOBAL_H
